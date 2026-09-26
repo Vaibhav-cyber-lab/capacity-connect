@@ -1,0 +1,79 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Global helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128;
+    }
+
+    // Users collection
+    match /users/{userId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Courses collection
+    match /courses/{courseId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Materials collection
+    match /materials/{materialId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Assessments collection
+    match /assessments/{assessmentId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Enrollments collection
+    match /enrollments/{enrollmentId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Scores collection
+    match /scores/{scoreId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Feedback collection
+    match /feedback/{feedbackId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Evaluations collection
+    match /evaluations/{evaluationId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Announcements collection
+    match /announcements/{announcementId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Competencies collection
+    match /competencies/{competencyId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Default catch-all deny rule
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

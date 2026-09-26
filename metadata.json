@@ -1,0 +1,8 @@
+{
+  "name": "Copy of Capacity Connect",
+  "description": "Smart Education — A modern, interactive Ed-Tech platform featuring AI Tutor, gamified study streaks, practice tests with timers and step-by-step hints, resource hub, and performance analytics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

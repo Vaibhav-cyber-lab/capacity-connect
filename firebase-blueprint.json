@@ -1,0 +1,185 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Represents a user of the learning management system (admin, trainer, or trainee).",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "password": { "type": "string" },
+        "role": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "profile": { "type": "object" }
+      },
+      "required": ["id", "name", "email", "role"]
+    },
+    "Course": {
+      "title": "Course",
+      "description": "A course created by a trainer.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "trainerId": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "thumbnail": { "type": "string" },
+        "category": { "type": "string" },
+        "duration": { "type": "string" }
+      },
+      "required": ["id", "title", "trainerId", "status"]
+    },
+    "Material": {
+      "title": "Material",
+      "description": "Learning material like PDFs or videos attached to a course.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "courseId": { "type": "string" },
+        "title": { "type": "string" },
+        "type": { "type": "string" },
+        "url": { "type": "string" }
+      },
+      "required": ["id", "courseId", "title", "type", "url"]
+    },
+    "Assessment": {
+      "title": "Assessment",
+      "description": "An assessment or quiz created for a course.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "courseId": { "type": "string" },
+        "title": { "type": "string" },
+        "deadline": { "type": "string" },
+        "questions": { "type": "array" }
+      },
+      "required": ["id", "courseId", "title"]
+    },
+    "Enrollment": {
+      "title": "Enrollment",
+      "description": "Records course enrollment of a trainee.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "courseId": { "type": "string" },
+        "traineeId": { "type": "string" },
+        "status": { "type": "string" },
+        "enrolledAt": { "type": "string" }
+      },
+      "required": ["id", "courseId", "traineeId", "status"]
+    },
+    "Score": {
+      "title": "Score",
+      "description": "Trainee scores for assessments.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "assessmentId": { "type": "string" },
+        "traineeId": { "type": "string" },
+        "score": { "type": "number" },
+        "totalQuestions": { "type": "number" },
+        "submittedAt": { "type": "string" }
+      },
+      "required": ["id", "assessmentId", "traineeId", "score"]
+    },
+    "Feedback": {
+      "title": "Feedback",
+      "description": "Course feedback submitted by trainees.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "courseId": { "type": "string" },
+        "traineeId": { "type": "string" },
+        "rating": { "type": "number" },
+        "comment": { "type": "string" },
+        "submittedAt": { "type": "string" }
+      },
+      "required": ["id", "courseId", "traineeId", "rating"]
+    },
+    "Evaluation": {
+      "title": "Evaluation",
+      "description": "Trainer evaluations of trainee performance.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "traineeId": { "type": "string" },
+        "trainerId": { "type": "string" },
+        "feedback": { "type": "string" },
+        "rating": { "type": "number" },
+        "submittedAt": { "type": "string" }
+      },
+      "required": ["id", "traineeId", "trainerId", "feedback"]
+    },
+    "Announcement": {
+      "title": "Announcement",
+      "description": "Platform announcement created by admins.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "target": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "title", "message", "target"]
+    },
+    "CompetencyMap": {
+      "title": "CompetencyMap",
+      "description": "Role dependency and skill competencies.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "role": { "type": "string" },
+        "skills": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "role", "skills"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "LMS users collection"
+    },
+    "/courses/{courseId}": {
+      "schema": "Course",
+      "description": "LMS courses collection"
+    },
+    "/materials/{materialId}": {
+      "schema": "Material",
+      "description": "LMS course materials collection"
+    },
+    "/assessments/{assessmentId}": {
+      "schema": "Assessment",
+      "description": "LMS assessments collection"
+    },
+    "/enrollments/{enrollmentId}": {
+      "schema": "Enrollment",
+      "description": "LMS enrollments collection"
+    },
+    "/scores/{scoreId}": {
+      "schema": "Score",
+      "description": "LMS assessment scores collection"
+    },
+    "/feedback/{feedbackId}": {
+      "schema": "Feedback",
+      "description": "LMS course feedback collection"
+    },
+    "/evaluations/{evaluationId}": {
+      "schema": "Evaluation",
+      "description": "LMS evaluations collection"
+    },
+    "/announcements/{announcementId}": {
+      "schema": "Announcement",
+      "description": "LMS announcements collection"
+    },
+    "/competencies/{competencyId}": {
+      "schema": "CompetencyMap",
+      "description": "LMS competency maps collection"
+    }
+  }
+}
